@@ -11,6 +11,7 @@
     "loadash": "0.0.1",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.0",
+    "react-native-communications": "^2.2.1",
     "react-native-router-flux": "3.38.0",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",

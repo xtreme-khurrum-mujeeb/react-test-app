@@ -3,9 +3,9 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import EmployeeList from './components/EmployeeList';
 import EmployeeCreate from './components/EmployeeCreate';
+import EmployeeEdit from './components/EmployeeEdit';
 
-const RouterComponent = () => {
-  return (
+const RouterComponent = () => (
     <Router sceneStyle={{ paddingTop: 65 }}>
       <Scene
         key="auth"
@@ -22,7 +22,7 @@ const RouterComponent = () => {
         leftButtonIconStyle={styles.navBarIconStyle}
       >
         <Scene
-          onRight={() => Actions.employeecreate()}
+          onRight={() => Actions.employeeCreate()}
           rightTitle="Add"
           rightButtonTextStyle={styles.navBarTitleStyle}
           key="employeeList"
@@ -32,15 +32,19 @@ const RouterComponent = () => {
           initial
         />
         <Scene
-          key="employeecreate"
+          key="employeeCreate"
           component={EmployeeCreate}
           title='Create Employee'
           panHandlers={null}
         />
+        <Scene
+          key="employeeEdit"
+          component={EmployeeEdit}
+          title='Edit Employee'
+        />
       </Scene>
     </Router>
   );
-};
 
 const styles = {
   navBarStyle: {

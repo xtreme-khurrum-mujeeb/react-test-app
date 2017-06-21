@@ -34,12 +34,37 @@ export const employeeCreate = ({ name, phone, shift }) => {
   };
 };
 
+export const employeeSave = ({ name, phone, shift, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .set({ name, phone, shift })
+      .then(() => {
+        Actions.employeeList({ type: 'reset' });
+      });
+  };
+};
+
 export const employeesFetch = () => {
   const { currentUser } = firebase.auth();
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
       .on('value', snapsshot => {
         dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapsshot.val() });
+      });
+  };
+};
+
+export const employeeDelete = ({ uid }) => {
+  console.log('In EmployeeDelete');
+  console.log({ uid });
+  const { currentUser } = firebase.auth();
+  return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .remove()
+      .then(() => {
+        Actions.employeeList({ type: 'reset' });
       });
   };
 };
